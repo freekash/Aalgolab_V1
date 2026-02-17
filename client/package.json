@@ -1,1 +1,12 @@
 axios.post("/api/auth/login", data);
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    ...
+  },
+  "scripts": {
+    ...
+  }
+}
