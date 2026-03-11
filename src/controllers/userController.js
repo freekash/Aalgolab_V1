@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
 exports.get = async (req, res, next) => {
   try {

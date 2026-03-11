@@ -19,6 +19,7 @@ const positionRoutes = require("./routes/positions");
 const botRoutes = require("./routes/bots");
 const backtestRoutes = require("./routes/backtests");
 const alertRoutes = require("./routes/alerts");
+const modeRoutes = require("./routes/mode");
 
 const app = express();
 const server = http.createServer(app);
@@ -105,6 +106,7 @@ app.use("/api/positions", positionRoutes);
 app.use("/api/bots", botRoutes);
 app.use("/api/backtests", backtestRoutes);
 app.use("/api/alerts", alertRoutes);
+app.use("/api/mode", modeRoutes);
 
 // health check
 app.get("/health", (req, res) => res.json({ ok: true }));

@@ -12,4 +12,7 @@ const orderSchema = new mongoose.Schema({
   status: String
 }, { timestamps: true });
 
+// Index for efficient daily trade count queries used in risk engine
+orderSchema.index({ userId: 1, createdAt: -1 });
+
 module.exports = mongoose.model('Order', orderSchema);

@@ -17,6 +17,30 @@ jest.mock('../models/User', () => {
   return User;
 });
 
+// No verified API keys exist for this user
+jest.mock('../models/APIKey', () => ({
+  findOne: () => Promise.resolve(null),
+}));
+
+jest.mock('../models/Order', () => {
+  class Order {
+    constructor(data) { Object.assign(this, data); }
+    save() { return Promise.resolve(this); }
+    static find() { return { sort: () => Promise.resolve([])} ; }
+    static findOne() { return Promise.resolve(null); }
+    static countDocuments() { return Promise.resolve(0); }
+  }
+  return Order;
+});
+
+jest.mock('../models/Alert', () => {
+  class Alert {
+    constructor(data) { Object.assign(this, data); }
+    save() { return Promise.resolve(this); }
+  }
+  return Alert;
+});
+
 let token;
 beforeAll(async () => {
   // register a user and login to get token
@@ -30,6 +54,6 @@ describe('Live mode guard', () => {
     const res = await request(app).post('/api/orders')
       .set('Authorization', `Bearer ${token}`)
       .send({ mode: 'LIVE', symbol: 'BTC/USDT', side: 'buy', type: 'market', quantity: 1 });
-    expect(res.statusCode).toBe(501);
+    expect(res.statusCode).toBe(403);
   });
 });

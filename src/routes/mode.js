@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const ctrl = require('../controllers/positionsController');
+const ctrl = require('../controllers/modeController');
 
 router.use(auth);
-router.get('/', ctrl.list);
+router.post('/switch', ctrl.switchMode);
 
 module.exports = router;
