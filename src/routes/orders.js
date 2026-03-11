@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const ctrl = require('../controllers/genericController');
+const ctrl = require('../controllers/orderController');
 
 router.use(auth);
-router.post('/', ctrl.notImplemented);
-router.get('/', ctrl.notImplemented);
-router.get('/:id', ctrl.notImplemented);
+router.post('/', ctrl.create);
+router.get('/', ctrl.list);
+router.get('/:id', ctrl.get);
 
 module.exports = router;
